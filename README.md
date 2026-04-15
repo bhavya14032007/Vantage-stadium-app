@@ -2,7 +2,7 @@
 
 > **Eliminating "dead time" at large-scale sporting events (50,000+ attendees) to maximize "fan time."**
 
-[![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?logo=github)](https://github.com/YOUR_USERNAME/vantage-stadium-app)
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?logo=github)](https://github.com/bhavya14032007/Vantage-stadium-app)
 ![Tech Stack](https://img.shields.io/badge/Stack-React%20%2B%20Vite-61DAFB?logo=react)
 ![Mobile First](https://img.shields.io/badge/Design-Mobile--First-00ff88)
 
