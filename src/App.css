@@ -1,3 +1,103 @@
+/* App-specific styles for Vantage */
+.loading-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.loading-message {
+  font-size: 1.2rem;
+  color: var(--color-text, #333);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1, 8px);
+  position: relative;
+  z-index: 1;
+}
+
+.sync-pulse {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-full, 9999px);
+  padding: 4px 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  backdrop-filter: blur(8px);
+}
+
+.sync-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-green-light, #4ade80);
+  animation: pulse 1.5s ease-in-out infinite;
+  display: block;
+}
+
+.sync-text {
+  font-size: 0.62rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.notification-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-md, 6px);
+  background: rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.sos-btn {
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.18);
+  color: white;
+  border-radius: var(--radius-md, 6px);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.sos-active {
+  background: white;
+  color: var(--color-red, #ef4444);
+  border: 2px solid var(--color-red, #ef4444);
+}
+
+.venue-strip {
+  margin-top: var(--space-1, 8px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.venue-info {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.venue-seat {
+  color: white;
+}
+
 .counter {
   font-size: 16px;
   padding: 5px 10px;

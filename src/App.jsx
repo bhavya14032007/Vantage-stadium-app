@@ -13,6 +13,7 @@ import LiveWaitAnalytics from './components/LiveWaitAnalytics';
 import ExpressOrder      from './components/ExpressOrder';
 import FriendFinder      from './components/FriendFinder';
 import EmergencyFlow     from './components/EmergencyFlow';
+import { logTabChange } from './utils/firebase';
 
 const TABS = [
   { id: 'map',       label: 'Pulse',    Icon: Map          },
@@ -22,13 +23,23 @@ const TABS = [
   { id: 'emergency', label: 'SOS',      Icon: AlertTriangle },
 ];
 
+const DATA_UPDATE_INTERVAL = 3500;
+
 export default function App() {
   const [activeTab, setActiveTab]       = useState('map');
   const [emergencyActive, setEmergency] = useState(false);
-  const { densities, waitTimes, friends, orders, setOrders, tickCount } = useStadiumData(3500);
-
+  const { densities, waitTimes, friends, orders, setOrders, tickCount, loading, error } = useStadiumData(DATA_UPDATE_INTERVAL);
+  // Error handling: Check if essential data is loaded
+  if (!densities || !waitTimes || !friends) {
+    return (
+      <div className="app-layout loading-state">
+        <div className="loading-message">Loading stadium data...</div>
+      </div>
+    );
+  }
   const handleTabChange = (tabId) => {
     setActiveTab(tabId);
+    logTabChange(tabId); // Push analytics event to Google Services
     if (tabId !== 'emergency') setEmergency(false);
   };
 
@@ -51,26 +62,19 @@ export default function App() {
             </div>
 
             {/* Right actions */}
-            <div style={{ display:'flex', alignItems:'center', gap:'var(--space-1)', position:'relative', zIndex:1 }}>
+            <div className="header-actions">
               {/* Sync pulse */}
               <div
                 key={tickCount}
-                className="animate-fade-in"
-                style={{
-                  background: 'rgba(255,255,255,0.15)',
-                  borderRadius: 'var(--radius-full)',
-                  padding: '4px 10px',
-                  display: 'flex', alignItems: 'center', gap: 5,
-                  backdropFilter: 'blur(8px)',
-                }}
+                className="sync-pulse animate-fade-in"
               >
-                <span style={{ width:6, height:6, borderRadius:'50%', background:'var(--color-green-light)', animation:'pulse 1.5s ease-in-out infinite', display:'block' }} />
-                <span style={{ fontSize:'0.62rem', color:'rgba(255,255,255,0.85)', fontWeight:700, letterSpacing:'0.08em', textTransform:'uppercase' }}>Live</span>
+                <span className="sync-dot" />
+                <span className="sync-text">Live</span>
               </div>
 
               {/* Notification icon */}
               <button
-                style={{ width:34, height:34, borderRadius:'var(--radius-md)', background:'rgba(255,255,255,0.15)', display:'flex', alignItems:'center', justifyContent:'center', color:'white' }}
+                className="notification-btn"
                 aria-label="Notifications"
               >
                 <Bell size={16} />
@@ -78,16 +82,7 @@ export default function App() {
 
               {/* SOS toggle */}
               <button
-                style={{
-                  padding: '6px 12px',
-                  background: emergencyActive ? 'white' : 'rgba(255,255,255,0.18)',
-                  color: emergencyActive ? 'var(--color-red)' : 'white',
-                  borderRadius: 'var(--radius-md)',
-                  display: 'flex', alignItems: 'center', gap: 5,
-                  fontSize: '0.72rem', fontWeight: 700,
-                  border: emergencyActive ? '2px solid var(--color-red)' : '1.5px solid rgba(255,255,255,0.3)',
-                  transition: 'all 0.2s',
-                }}
+                className={`sos-btn ${emergencyActive ? 'sos-active' : ''}`}
                 onClick={handleEmergencyToggle}
                 aria-pressed={emergencyActive}
                 aria-label={emergencyActive ? 'Deactivate SOS' : 'Activate SOS'}
@@ -100,12 +95,12 @@ export default function App() {
           </div>
 
           {/* Venue strip */}
-          <div style={{ marginTop:'var(--space-1)', display:'flex', justifyContent:'space-between', alignItems:'center', position:'relative', zIndex:1 }}>
-            <span style={{ fontSize:'0.72rem', color:'rgba(255,255,255,0.75)' }}>
+          <div className="venue-strip">
+            <span className="venue-info">
               🏟️ Narendra Modi Stadium · 22:30 IST
             </span>
-            <span style={{ fontSize:'0.72rem', color:'rgba(255,255,255,0.75)' }}>
-              Sec <strong style={{ color:'white' }}>B2</strong> · Row 14 · Seat 7
+            <span className="venue-info">
+              Sec <strong className="venue-seat">B2</strong> · Row 14 · Seat 7
             </span>
           </div>
         </div>
