@@ -474,12 +474,12 @@ ul, ol { list-style: none; }
   line-height: 1;
 }
 .logo-sub {
-  font-size: 0.65rem;
-  color: rgba(255,255,255,0.65);
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.7);
   font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  margin-top: 2px;
 }
+.logo-sub strong { color: white; font-weight: 800; }
 
 /* Tab bar below hero */
 .header-tab-bar {
@@ -598,4 +598,147 @@ ul, ol { list-style: none; }
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* --- Header Actions --- */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  position: relative;
+  z-index: 10;
+}
+
+.sync-pulse {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-full);
+  padding: 4px 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  backdrop-filter: blur(8px);
+}
+.sync-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-green-light);
+  box-shadow: 0 0 10px var(--color-green-light);
+}
+.sync-text {
+  font-size: 0.62rem;
+  color: rgba(255,255,255,0.9);
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.notification-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  position: relative;
+}
+.notification-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 6px;
+  height: 6px;
+  background: var(--color-red);
+  border-radius: 50%;
+  border: 1.5px solid var(--color-primary);
+}
+
+.sos-btn {
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.18);
+  color: white;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  border: 1.5px solid rgba(255,255,255,0.3);
+  transition: all var(--transition-base);
+}
+.sos-btn.sos-active {
+  background: white;
+  color: var(--color-red);
+  border-color: var(--color-red);
+  box-shadow: var(--shadow-red);
+}
+
+/* --- Announcement Ticker (Firestore Demo) --- */
+.announcement-ticker {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: var(--radius-md);
+  margin-top: var(--space-2);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+.ticker-label {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 6px 12px;
+  font-size: 0.6rem;
+  font-weight: 900;
+  color: white;
+  letter-spacing: 0.1em;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.ticker-track {
+  display: flex;
+  padding: 0 var(--space-2);
+  white-space: nowrap;
+  animation: ticker-scroll 30s linear infinite;
+}
+.ticker-item {
+  color: rgba(255,255,255,0.9);
+  font-size: 0.7rem;
+  font-weight: 600;
+  margin-right: 24px;
+  display: flex;
+  align-items: center;
+}
+
+@keyframes ticker-scroll {
+  from { transform: translateX(100%); }
+  to { transform: translateX(-100%); }
+}
+
+/* --- Venue Strip --- */
+.venue-strip {
+  margin-top: var(--space-2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+.venue-info {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.75);
+  font-weight: 500;
+}
+.venue-seat { color: white; }
+
+/* --- Auth Overlay --- */
+.auth-overlay {
+  animation: fade-in 0.4s ease forwards;
+}
+.auth-overlay input:focus {
+  outline: none;
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 0 4px var(--color-primary-soft);
 }

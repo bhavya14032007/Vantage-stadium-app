@@ -151,11 +151,11 @@ export default function EmergencyFlow({ active, onToggle }) {
             <p style={{ fontFamily:'var(--font-display)', fontWeight:800, fontSize:'1.2rem', color:'var(--color-green)' }}>
               {recommended.label}
             </p>
-            <p style={{ fontSize:'0.78rem', color:'var(--color-text-secondary)', marginTop:3 }}>
+            <div style={{ fontSize:'0.78rem', color:'var(--color-text-secondary)', marginTop:3, display:'flex', alignItems:'center', gap:4 }}>
               ~{svgDist(recommended)} min walk ·{' '}
-              <Bus size={11} style={{ display:'inline', marginRight:3 }} />
+              <Bus size={11} style={{ flexShrink:0 }} />
               Shuttle: {recommended.shuttleWait} min
-            </p>
+            </div>
           </div>
           <div style={{
             width:52, height:52, borderRadius:'var(--radius-full)',

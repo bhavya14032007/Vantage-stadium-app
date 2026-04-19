@@ -3,6 +3,7 @@
  */
 import { useState } from 'react';
 import { ShoppingCart, Bell, CheckCircle2, Clock, ChefHat, Plus, Minus, Sparkles, Package } from 'lucide-react';
+import { sanitize } from '../utils/validation';
 
 const MENU = [
   { id: 'm1', name: 'Spicy Loaded Fries',  emoji: '🍟', price: 180, prepTime: 8,  category: 'Snacks' },
@@ -43,7 +44,7 @@ export default function ExpressOrder({ orders, setOrders }) {
     const newOrder = {
       id: `o${Date.now()}`,
       item: Object.keys(cart).length === 1
-        ? MENU.find(m => m.id === Object.keys(cart)[0])?.name
+        ? sanitize(MENU.find(m => m.id === Object.keys(cart)[0])?.name)
         : `${Object.keys(cart).length}-item order`,
       emoji: MENU.find(m => m.id === Object.keys(cart)[0])?.emoji || '🛍️',
       price: cartTotal,
